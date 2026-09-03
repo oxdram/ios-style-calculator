@@ -15,9 +15,18 @@ android {
         versionName = "1.0"
     }
 
+    signingConfigs {
+        create("release") {
+            // Значения подставляются через параметры командной строки в CI
+            // (-Pandroid.injected.signing.store.file и т.д.), поэтому здесь
+            // ничего вручную указывать не нужно — Gradle подхватит их сам.
+        }
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = false
+            signingConfig = signingConfigs.getByName("release")
         }
     }
 
